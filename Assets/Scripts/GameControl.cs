@@ -12,10 +12,10 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Transform handle; // control the handle
     [SerializeField] private Text playerCash; // total money of the player
     [SerializeField] private Text winText; // win value bar
-    [SerializeField] private Text payoutLines; // to be changed into shapes
     [SerializeField] private Button spinButton; // for disable and enable purposes
+    //[SerializeField] private Text payoutLines; // to be changed into shapes
 
-    
+
     public int playerCashInt; // Convert int to string for your player cash
     private int winValue; // Win value that we hold after winning
     private bool resultsChecked = false; // will not allow to check variables multiple times? when rows stop spinning
@@ -66,6 +66,15 @@ public class GameControl : MonoBehaviour
         if (param != null)
         {
             int bet = param.GetParameter<int>("currBetValue", 0);
+
+            if (bet >= -10)
+            {
+                totalBet += 10;
+            } else 
+            {
+                totalBet -= 10;
+            }
+
             playerCashInt += bet;
             playerCash.text = playerCashInt.ToString();
         }
