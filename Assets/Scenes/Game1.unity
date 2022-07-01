@@ -1484,9 +1484,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 447563893}
+      - m_Target: {fileID: 447563898}
         m_TargetAssemblyTypeName: GameControl, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ClickSpin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1557,6 +1557,7 @@ MonoBehaviour:
   playerCash: {fileID: 1538417162}
   winText: {fileID: 851903579}
   payoutLines: {fileID: 0}
+  spinButton: {fileID: 447563895}
   playerCashInt: 0
 --- !u!1 &498011761
 GameObject:
@@ -3405,6 +3406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb243b943448b1345ac1ccd8ab92d963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  betText: {fileID: 189373591}
+  increase: {fileID: 1937625635}
+  decrease: {fileID: 940949742}
+  playerCash: 0
 --- !u!1 &1242233517
 GameObject:
   m_ObjectHideFlags: 0
