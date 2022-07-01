@@ -13,19 +13,13 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text playerCash; // total money of the player
     [SerializeField] private Text winText; // win value bar
     [SerializeField] private Text payoutLines; // to be changed into shapes
-    //[SerializeField] private Button spinButton; // for disable and enable purposes
+    [SerializeField] private Button spinButton; // for disable and enable purposes
 
     
     public int playerCashInt; // Convert int to string for your player cash
     private int winValue; // Win value that we hold after winning
     private bool resultsChecked = false; // will not allow to check variables multiple times? when rows stop spinning
-
-
-    //private bool isDone = false;
-    //public bool IsDone
-    //{
-    //    get { return this.isDone; }
-    //}
+    private int totalBet;
 
     void Start()
     {
@@ -36,23 +30,20 @@ public class GameControl : MonoBehaviour
     {
         playerCashInt = 200;
         playerCash.text = playerCashInt.ToString();
-        //EventBroadcaster.Instance.AddObserver(EventNames.ON_BET_MODIFIED, BetTextValue);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_BET_MODIFIED, BetTextValue);
     }
-
-
 
     void Update()
     {
-        //Parameters param = new Parameters();
-        //param.AddParameter<int>("currCashValue", playerCashInt);
+        
 
-        //if (playerCashInt <= -1)
-        //{
-        //    this.spinButton.enabled = false;
-        //} else
-        //{
-        //    this.spinButton.enabled = true;
-        //}
+        if (playerCashInt <= -1)
+        {
+            this.spinButton.enabled = false;
+        } else
+        {
+            this.spinButton.enabled = true;
+        }
 
         if (!rows[0].rowStopped || !rows[1].rowStopped || !rows[2].rowStopped || !rows[3].rowStopped || !rows[4].rowStopped)
         {
@@ -70,19 +61,15 @@ public class GameControl : MonoBehaviour
 
     }
 
-    //public void BetTextValue(Parameters param = null)
-    //{
-    //    if (param != null)
-    //    {
-
-    //        int bet = param.GetParameter<int>("currBetValue", 0);
-    //        Debug.Log("CURRENT BET: " + bet);
-    //        playerCashInt += bet;
-    //        playerCash.text = playerCashInt.ToString();
-
-
-    //    }
-    //}
+    public void BetTextValue(Parameters param = null)
+    {
+        if (param != null)
+        {
+            int bet = param.GetParameter<int>("currBetValue", 0);
+            playerCashInt += bet;
+            playerCash.text = playerCashInt.ToString();
+        }
+    }
 
 
     public void ClickSpin()
@@ -98,7 +85,6 @@ public class GameControl : MonoBehaviour
 
     }
 
-    
 
     private IEnumerator PullHandle()
     {
@@ -227,7 +213,8 @@ public class GameControl : MonoBehaviour
     // Payout Lines to Cash
     public void Payouts(int value)
     {
-        winValue += value;
+        Debug.Log("TOTAL BET: " + totalBet);
+        winValue += totalBet * value;
         winText.text = winValue.ToString();
 
         playerCashInt += winValue;
