@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Bet : MonoBehaviour
 {
     [SerializeField] private Text betText; // convert bet text to int
-    [SerializeField] private Button increase; // decrease by 10
     [SerializeField] private Button decrease; // decrease by 10
     private int betCash; // Cash - bet
 
@@ -17,7 +16,6 @@ public class Bet : MonoBehaviour
     {
         betCash = 10;
         betText.text = betCash.ToString();
-        //EventBroadcaster.Instance.AddObserver(EventNames.ON_CASH_DEDUCTED, ModifyBetIncrease);
     }
 
     public void ModifyBetDecrease()
